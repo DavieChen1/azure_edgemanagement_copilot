@@ -1519,9 +1519,9 @@ function Set-HCIDeployPrereqs {
             Install-Module AzsHCI.ARCinstaller -Force
 
             #Install required PowerShell modules in your node for registration
-            Install-Module Az.Accounts -Force
-            Install-Module Az.ConnectedMachine -Force
-            Install-Module Az.Resources -Force
+            Install-Module Az.Accounts -RequiredVersion 3.0.0 -Force
+            Install-Module Az.Resources -RequiredVersion 6.12.0 -Force
+            Install-Module Az.ConnectedMachine -RequiredVersion 0.8.0 -Force
             $azureAppCred = (New-Object System.Management.Automation.PSCredential $clientId, (ConvertTo-SecureString -String $clientSecret -AsPlainText -Force))
             Connect-AzAccount -ServicePrincipal -SubscriptionId $subId -TenantId $tenantId -Credential $azureAppCred
             $armtoken = ConvertFrom-SecureStringToPlainText -SecureString ((Get-AzAccessToken -AsSecureString).Token)
@@ -1681,8 +1681,8 @@ Write-Host "[Build cluster - Step 1/11] Downloading HCIBox VHDs" -ForegroundColo
 $Env:AZCOPY_BUFFER_GB = 4
 Write-Output "Downloading nested VMs VHDX files. This can take some time, hold tight..."
 
-azcopy cp 'https://jumpstartprodsg.blob.core.windows.net/hcibox23h2/hcibox23h2v2.vhdx' "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.vhdx" --recursive=true --check-length=false --log-level=ERROR
-azcopy cp 'https://jumpstartprodsg.blob.core.windows.net/hcibox23h2/hcibox23h2v2.sha256' "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.sha256" --recursive=true --check-length=false --log-level=ERROR
+azcopy cp 'https://edgemanagementcopilot.blob.core.windows.net/2408/Asz2408.1.vhdx' "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.vhdx" --recursive=true --check-length=false --log-level=ERROR
+azcopy cp 'https://edgemanagementcopilot.blob.core.windows.net/2408/Asz2408.1.sha256' "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.sha256" --recursive=true --check-length=false --log-level=ERROR
 
 <# $checksum = Get-FileHash -Path "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.vhdx"
 $hash = Get-Content -Path "$($HCIBoxConfig.Paths.VHDDir)\AZSHCI.sha256"
