@@ -30,7 +30,7 @@ param natDNS string = '8.8.8.8'
 param githubAccount string = 'DavieChen1'
 
 @description('Target GitHub branch')
-param githubBranch string = 'main'
+param githubBranch string = 'HCI2408'
 
 @description('Choice to deploy Bastion to connect to the client VM')
 param deployBastion bool = false
