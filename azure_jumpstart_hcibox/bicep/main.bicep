@@ -27,7 +27,7 @@ param logAnalyticsWorkspaceName string
 param natDNS string = '8.8.8.8'
 
 @description('Target GitHub account')
-param githubAccount string = 'microsoft'
+param githubAccount string = 'DavieChen1'
 
 @description('Target GitHub branch')
 param githubBranch string = 'main'
@@ -65,7 +65,7 @@ var resourceTags = governResourceTags ? union(tags, {
     SecurityControl: 'Ignore'
 }) : tags
 
-var templateBaseUrl = 'https://raw.githubusercontent.com/${githubAccount}/azure_arc/${githubBranch}/azure_jumpstart_hcibox/'
+var templateBaseUrl = 'https://raw.githubusercontent.com/${githubAccount}/azure_edgemanagement_copilot/${githubBranch}/azure_jumpstart_hcibox/'
 
 module mgmtArtifactsAndPolicyDeployment 'mgmt/mgmtArtifacts.bicep' = {
   name: 'mgmtArtifactsAndPolicyDeployment'
